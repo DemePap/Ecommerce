@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaGoogle } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { admin_login } from '../../store/Reducers/authReducer';
 
-const Login = () => {
+
+
+
+const AdminLogin = () => {
+
+    const dispatch = useDispatch();
     const [state, setState] = useState({
         email : '',
         password : ''
@@ -18,18 +22,26 @@ const Login = () => {
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(state);
+        dispatch(admin_login(state));
+        // console.log(state);
     }
     return (
         <div className='min-w-screen min-h-screen bg-[#cdcae9] flex justify-center items-center'>
         <div className='w-[350px] text-[#ffffff] p-2'>
         <div className='bg-[#6f68d1] p-4 rounded-md'>
-            <h2 className='text-xl mb-3 font-bold'>
-            Bienvenue sur DiaYma
+
+        <div className='h-[90px] flex justufy-center items-center'>
+            <div className='w-[120px] h-[90px] '>
+                <img className='w-full h-full' src="http://localhost:3000/images/logo.png" alt="img" />
+            </div>
+
+        </div>
+            {/* <h2 className='text-xl mb-3 font-bold'>
+            Bienvenu administrateur (rice)
             </h2>
             <p className='text-sm mb-3 font-medium'>
             Merci de vous connecter
-            </p>
+            </p> */}
             <form onSubmit={submit}>
                 <div className='flex flex-col w-full gap-1 mb-3'>
                 <label htmlFor='email'>Email</label>
@@ -44,38 +56,7 @@ const Login = () => {
                 </div> 
 
                 <button onChange={submit} className='bg-[#0a0827] p-2 rounded-md w-full hover:shadow-black hover:shadow-lg text-white px-7 py-2 mb-3'>Se connecter</button>
-               
-
-                <div className='flex items-center mb-3 gap-3 justify-center'>
-                <p>Vous n'avez pas de compte ? <Link className='font-bold' to='/register'>S'inscrire</Link></p>
-                </div>
                  
-                 <div className='w-full flex flex-col items-center gap-4 mb-3'>
-
-  {/* --- LIGNE + "ou" --- */}
-  <div className='w-full flex items-center justify-center gap-2'>
-    <div className='w-[45%] h-[1px] bg-slate-700'></div>
-    <div className='text-sm text-gray-500'><span className='pb-1 text-white font-bold'>ou</span></div>
-    <div className='w-[45%] h-[1px] bg-slate-700'></div>
-  </div>
-
-  {/* --- BOUTONS SOCIAL --- */}
-
-  <div className='flex justify-center items-center gap-3'>
-    {/* Bouton Google */}
-    <div className='w-[135px] h-[35px] flex items-center justify-center rounded-md bg-orange-700 shadow-lg hover:shadow-orange-700/50 cursor-pointer overflow-hidden'>
-      <span><FaGoogle /></span>
-    </div>
-
-    {/* Bouton Facebook */}
-    <div className='w-[135px] h-[35px] flex items-center justify-center rounded-md bg-blue-700 shadow-lg hover:shadow-blue-700/50 cursor-pointer overflow-hidden'>
-      <span><FaFacebook /></span>
-    </div>
-  </div>
-
-</div>
-
-
             </form>
         </div>
         </div>
@@ -83,4 +64,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default AdminLogin;
